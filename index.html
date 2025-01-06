@@ -7,19 +7,40 @@
     <!-- Bootstrap CSS -->
      <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!--simply countdown-->
+    <link rel="stylesheet" href="countdown/simplyCountdown.theme.default.css">
+    <script src="countdown/simplyCountdown.min.js"></script>
 </head>
+
 <body>
     <section id="hero" class="hero w-100 h-100 p-3 mx-auto text-center d-flex justify-content-center align-items-center text-white">
         <main>
             <h4>Kepada Bapak/Ibu/Saudara/i, </h4>
             <h1>Ronaldo & Alexa</h1>
             <p>Akan Melangsungkan resepsi pernikahan dalam:</p>
+            <div class="countdown"></div>
             <a href="#undangan" class="btn btn-lg mt-4 ">Lihat Undangan</a>
 
         </main>
     </section>
 
     <!-- Bootstrap JS -->
+    <script>
+        simplyCountdown('.countdown',{
+        year: 2025, // required
+        month: 2, // required
+        day: 22, // required
+        hours: 8, // Default is 0 [0-23] integer
+        words: { //words displayed into the countdown
+        days: { singular: 'hari', plural: 'hari' },
+        hours: { singular: 'jam', plural: 'jam' },
+        minutes: { singular: 'menit', plural: 'menit' },
+        seconds: { singular: 'detik', plural: 'detik' }
+      },
+    });
+
+    </script>
     <script src="js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+   
