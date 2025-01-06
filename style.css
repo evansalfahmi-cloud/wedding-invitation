@@ -1,0 +1,27 @@
+@font-face {
+    font-family: 'Sacramento';
+    src: url('../fonts/sacramento.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'HelveticaNeue';
+    src: url('../fonts/helveticaneue.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'SF-Pro-Display-Regular';
+    src: url('../fonts/SF-Pro-Display-Regular.otf') format('opentype');
+}
+
+/* Contoh penggunaan font */
+body {
+    font-family: 'SF Pro Display Regular', sans-serif;
+}
+
+h1 {
+    font-family: 'Sacramento', cursive;
+}
+
+p {
+    font-family: 'HelveticaNeue', sans-serif;
+}
