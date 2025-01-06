@@ -1,9 +1,10 @@
 :root {
     --pink:#f14e95;
     --bg:#0a0a0a;
-    --shadow: 0 2px 2px rgb(0,0,0/0.5);
+    --shadow: 0 2px 2px rgb(0 0 0/0.5);
     
 }
+
 
 @font-face {
     font-family: 'Sacramento';
@@ -27,9 +28,26 @@ body {
     font-family: 'SF Pro Display Regular', sans-serif;
 }
 
+.hero::before{
+    content: '';
+    position: absolute;
+    background-position:  center;
+    background-repeat: no-repeat;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('img/bg-prewed.jpg');
+    z-index: -1;
+}
+.hero h1,.hero h4, .hero p{
+    text-shadow: var(--shadow) ;
+}
+
 .hero {
     min-height: 100vh;
-    background-color: var(--bg);
+    position: relative;
+   
 }
 
 .hero h1 {
