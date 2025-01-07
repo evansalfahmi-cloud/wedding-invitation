@@ -71,11 +71,16 @@ body {
     color : var(--red);
     background-color: white;
     box-shadow: var(--shadow);
+    
 }
 
 .hero a:hover{
     background-color: var(--red);
     color: white;
+}
+
+.navbar {
+    font-family: 'SF Pro Display Regular', sans-serif;
 }
 
 /*media query*/
