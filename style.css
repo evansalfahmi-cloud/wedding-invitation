@@ -79,8 +79,25 @@ body {
     color: white;
 }
 
-.navbar {
+.mynavbar{
+    background-color: rgba(255, 255, 255, 0.4) !important;
+    backdrop-filter: blur(4px);
+}
+
+.mynavbar .offcanvas {
+    height: 100vh;
+}
+
+.mynavbar .navbar-brand, .mynavbar .offcanvas-title {
+    font-family: 'Sacramento', cursive;
+    font-size: 3.2rem;
+    font-weight: bold;
+}
+
+.mynavbar .nav-link {
+    text-transform: uppercase;
     font-family: 'SF Pro Display Regular', sans-serif;
+
 }
 
 /*media query*/
@@ -94,6 +111,16 @@ body {
 @media (max-width: 768px){
     html {
         font-size: 65% ;
+
+        .mynavbar .offcanvas {
+            width: 100%;
+        }
+
+        .mynavbar .nav-link {
+            font-size: 2rem;
+            text-align: center;
+        }
+        
     }   
 }
 
