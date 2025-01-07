@@ -99,6 +99,11 @@ body {
 
 }
 
+.full-screen-navbar{
+    z-index: 1050;
+}
+
+
 
 
 .home {
