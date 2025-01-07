@@ -112,13 +112,17 @@ body {
     html {
         font-size: 65% ;
 
-        .mynavbar .offcanvas {
+        .mynavbar {
             width: 100%;
         }
 
         .mynavbar .nav-link {
             font-size: 2rem;
             text-align: center;
+        }
+
+        .mynavbar .navbar-brand{
+            font-size: 4rem;
         }
         
     }   
