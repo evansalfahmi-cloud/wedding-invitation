@@ -85,9 +85,6 @@ body {
     backdrop-filter: blur(4px);
 }
 
-.mynavbar .offcanvas {
-    height: 100vh;
-}
 
 .mynavbar .navbar-brand, .mynavbar .offcanvas-title {
     font-family: 'Sacramento', cursive;
@@ -101,6 +98,8 @@ body {
     font-family: 'SF Pro Display Regular', sans-serif;
 
 }
+
+
 
 .home {
     background-image: url(img/bg-wed.png);
@@ -140,6 +139,10 @@ body {
 
         .mynavbar {
             width: 100%;
+        }
+
+        .full-screen-navbar{
+            height: 100vh;
         }
 
         .mynavbar .nav-link {
