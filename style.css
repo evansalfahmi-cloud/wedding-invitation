@@ -343,7 +343,23 @@ body {
 
 .gallery {
   background-color: #f5f5f5;
+  
 }
+
+.gallery img {
+  width: 100%; /* Memastikan gambar memenuhi lebar kolom */
+  height: auto; /* Menghindari distorsi gambar */
+  aspect-ratio: 3 / 4; /* Memastikan rasio 3:4 */
+  object-fit: cover; /* Menjaga konten gambar tetap proporsional */
+  border-radius: 8px; /* Menambahkan sedikit sudut membulat */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Memberikan efek bayangan */
+  transition: transform 0.3s ease; /* Memberikan efek saat hover */
+}
+
+.gallery img:hover {
+  transform: scale(1.05); /* Sedikit memperbesar gambar saat dihover */
+}
+
 
 /*media query*/
 /* Laptop */
