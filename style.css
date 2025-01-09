@@ -165,7 +165,51 @@ body {
     color: var(--pink);
   }
 
+  .info h2 {
+    color: var(--pink);
+  }
+  .info {
+    background-color: var(--bg);
+    color: white;
+    padding-top: 10rem;
+    padding-bottom: 8rem;
+    display: flex; /* Menambahkan flexbox */
+    flex-direction: column; /* Untuk mengatur arah konten */
+    justify-content: center; /* Memusatkan secara vertikal */
+    align-items: center; /* Memusatkan secara horizontal */
+    text-align: center; /* Agar teks berada di tengah */
+  }
   
+  .info .alamat {
+    font-size: 1.1rem;
+  }
+  
+  .info .description {
+    font-size: 1rem;
+    font-weight: 300;
+  }
+  
+  .info .card {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    color: white !important;
+    border: 1px solid #999;
+  }
+  
+  .info .card-header {
+    border-bottom: 1px solid #999;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+  }
+  
+  .info .card-body {
+    font-size: 1rem;
+  }
+  
+  .info .card-footer {
+    border-top: 1px solid #999;
+    font-size: 0.9rem;
+    font-weight: 300;
+  }
 
 /*media query*/
 /* Laptop */
