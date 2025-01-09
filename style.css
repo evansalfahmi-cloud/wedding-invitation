@@ -2,6 +2,7 @@
     --pink:#f14e95;
     --red: #690000;
     --bg:#0a0a0a;
+    --dg:#202723;
     --shadow: 0 2px 2px rgb(0 0 0/0.5);
     
 }
@@ -96,6 +97,7 @@ body {
 
     text-transform: uppercase;
     font-family: 'SF Pro Display Regular', sans-serif;
+    font-size: 1.2rem;
 
 }
 
@@ -169,7 +171,7 @@ body {
     color: var(--pink);
   }
   .info {
-    background-color: var(--bg);
+    background-color: var(--dg);
     color: white;
     padding-top: 10rem;
     padding-bottom: 8rem;
@@ -178,6 +180,7 @@ body {
     justify-content: center; /* Memusatkan secara vertikal */
     align-items: center; /* Memusatkan secara horizontal */
     text-align: center; /* Agar teks berada di tengah */
+    font-family: 'SF Pro Display Regular', sans-serif;
   }
   
   .info .alamat {
@@ -199,6 +202,7 @@ body {
     border-bottom: 1px solid #999;
     text-transform: uppercase;
     letter-spacing: 0.1rem;
+    font-size: 1.6rem;
   }
   
   .info .card-body {
