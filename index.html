@@ -271,6 +271,104 @@
       </div>
     </section>
 
+    <!-- Section RSVP -->
+    <section id="rsvp" class="rsvp py-5 bg-light">
+      <div class="container d-flex justify-content-center">
+          <div class="col-lg-6 col-md-8 col-sm-10">
+              <h2 class="text-center mb-4">RSVP Pernikahan</h2>
+              <form id="rsvpForm" class="row g-3">
+                  <div class="col-md-12">
+                      <label for="name" class="form-label">Nama:</label>
+                      <input type="text" id="name" name="name" class="form-control" required>
+                  </div>
+                  <div class="col-md-12">
+                      <label for="phone" class="form-label">Nomor Handphone:</label>
+                      <input type="text" id="phone" name="phone" class="form-control" required>
+                  </div>
+                  <div class="col-md-12">
+                      <label for="attendance" class="form-label">Konfirmasi Kehadiran:</label>
+                      <select id="attendance" name="attendance" class="form-select" required>
+                          <option value="Hadir">Hadir</option>
+                          <option value="Tidak Hadir">Tidak Hadir</option>
+                      </select>
+                  </div>
+                  <div class="col-md-12">
+                      <label for="comment" class="form-label">Komentar:</label>
+                      <textarea id="comment" name="comment" class="form-control" rows="4"></textarea>
+                  </div>
+                  <div class="col-12 text-center">
+                      <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </section>
+
+  <!-- Section Komentar -->
+  <section id="comment" class="comment py-5">
+      <div class="container d-flex justify-content-center">
+          <div class="col-lg-6 col-md-8 col-sm-10">
+              <h3 class="text-center mb-4">Komentar Tamu</h3>
+              <div id="comments" class="list-group">
+                  <!-- Komentar akan ditampilkan di sini -->
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <!-- Link Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+      document.getElementById('rsvpForm').addEventListener('submit', async function (e) {
+          e.preventDefault();
+          const name = document.getElementById('name').value;
+          const phone = document.getElementById('phone').value;
+          const attendance = document.getElementById('attendance').value;
+          const comment = document.getElementById('comment').value;
+
+          // Kirim data ke server backend untuk disimpan ke MySQL dan Google Sheets
+          try {
+              const response = await fetch('/rsvp', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ name, phone, attendance, comment })
+              });
+              const result = await response.json();
+              if (result.success) {
+                  alert('RSVP berhasil dikirim!');
+                  loadComments(); // Muat ulang komentar
+                  document.getElementById('rsvpForm').reset(); // Reset form
+              } else {
+                  alert('Gagal mengirim RSVP. Silakan coba lagi.');
+              }
+          } catch (error) {
+              console.error('Error:', error);
+              alert('Terjadi kesalahan. Silakan coba lagi.');
+          }
+      });
+
+      // Fungsi untuk memuat komentar dari server
+      async function loadComments() {
+          try {
+              const response = await fetch('/comments');
+              const comments = await response.json();
+              const commentsContainer = document.getElementById('comments');
+              commentsContainer.innerHTML = '';
+              comments.forEach(comment => {
+                  const commentItem = document.createElement('div');
+                  commentItem.classList.add('list-group-item');
+                  commentItem.innerHTML = `<strong>${comment.name}</strong>: ${comment.comment}`;
+                  commentsContainer.appendChild(commentItem);
+              });
+          } catch (error) {
+              console.error('Error:', error);
+          }
+      }
+
+      // Muat komentar saat halaman dimuat
+      loadComments();
+  </script>
+
 
     <!-- Bootstrap JS -->
     <script>
