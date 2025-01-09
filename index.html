@@ -38,13 +38,13 @@
               <a class="nav-link" href="#home">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Info</a>
+              <a class="nav-link" href="#info">Info</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Story</a>
+              <a class="nav-link" href="#story">Story</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Gallery</a>
+              <a class="nav-link" href="#gallery">Gallery</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">RSVP</a>
@@ -286,9 +286,36 @@
         seconds: { singular: 'detik', plural: 'detik' }
       },
     });
-
     </script>
+
+<script>
+  // Fungsi untuk menonaktifkan scroll
+  function disableScroll() {
+      window.addEventListener('scroll', preventScroll);
+      document.body.style.overflow = 'hidden'; // Alternatif untuk mengunci scroll
+  }
+
+  // Fungsi untuk mencegah scroll secara manual
+  function preventScroll(event) {
+      window.scrollTo(0, 0); // Tetap di posisi awal
+  }
+
+  // Fungsi untuk mengaktifkan kembali scroll
+  function enableScroll() {
+      window.removeEventListener('scroll', preventScroll);
+      document.body.style.overflow = 'auto'; // Mengembalikan scroll
+  }
+
+  // Menonaktifkan scroll saat halaman dimuat
+  disableScroll();
+
+  // Menambahkan event listener ke tombol untuk mengaktifkan scroll
+  document.getElementById('enableScroll').addEventListener('click', enableScroll);
+</script>    
+
     <script src="js/bootstrap.bundle.min.js"></script>
+
+    
 </body>
 </html>
    
