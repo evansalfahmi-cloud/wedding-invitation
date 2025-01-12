@@ -360,6 +360,40 @@ body {
   transform: scale(1.05); /* Sedikit memperbesar gambar saat dihover */
 }
 
+#comments-section {
+  margin: 20px auto;
+  padding: 20px;
+  max-width: 600px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#comments-container {
+  margin-top: 10px;
+}
+
+.comments-section-item {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.comments-section-item:last-child {
+  border-bottom: none;
+}
+
+.comments-section-name {
+  font-weight: bold;
+  color: #333;
+}
+
+.comments-section-text {
+  margin-top: 5px;
+  font-size: 14px;
+  color: #555;
+}
+
+
 
 /*media query*/
 /* Laptop */
