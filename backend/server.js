@@ -26,14 +26,17 @@ db.connect((err) => {
   console.log("MySQL connected...");
 });
 
-// Konfigurasi Google Sheets
-const sheets = google.sheets({ version: "v4" });
-const auth = new google.auth.GoogleAuth({
-  keyFile: path.join(__dirname, "wedding-rsvp-447316-11c78ce8029e.json"), // Menggunakan path yang benar untuk credentials.json
-  scopes: ["https://www.googleapis.com/auth/spreadsheets"],
-});
+// Google Sheets Configuration
+const SHEET_ID = '1EcYIP2sRmKxXNDPXGUD4uXLk9Y3JfDPtPwGHQIZB4m8';
+const doc = new GoogleSpreadsheet(SHEET_ID);
 
-const spreadsheetId = "1EcYIP2sRmKxXNDPXGUD4uXLk9Y3JfDPtPwGHQIZB4m8";
+async function accessGoogleSheet() {
+    await doc.useServiceAccountAuth(require('./wedding-rsvp-447316-11c78ce8029e.json')); // Path to your service account credentials
+    await doc.loadInfo();
+}
+accessGoogleSheet();
+
+
 
 // API untuk menerima data RSVP
 app.post("/rsvp", async (req, res) => {
