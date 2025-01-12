@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mysql = require("mysql2");
 const { google } = require("googleapis");
+const path = require("path");
 
 const app = express();
 app.use(bodyParser.json());
@@ -21,10 +22,15 @@ db.connect((err) => {
 
 // Konfigurasi Google Sheets
 const sheets = google.sheets({ version: "v4" });
+
+// Menentukan path file kredensial yang berada di direktori yang sama dengan server.js
+const credentialsPath = path.join(__dirname, 'credentials.json');
+
 const auth = new google.auth.GoogleAuth({
-  keyFile: "credentials.json",
+  keyFile: credentialsPath,
   scopes: ["https://www.googleapis.com/auth/spreadsheets"],
 });
+
 const spreadsheetId = "1EcYIP2sRmKxXNDPXGUD4uXLk9Y3JfDPtPwGHQIZB4m8";
 
 // API untuk menerima data RSVP
@@ -60,12 +66,12 @@ app.post("/rsvp", async (req, res) => {
   res.status(200).send("RSVP berhasil disimpan.");
 });
 
+// API untuk mendapatkan komentar
 app.get("/comments", (req, res) => {
-    db.query("SELECT name, comment FROM rsvp", (err, results) => {
-      if (err) return res.status(500).send("Gagal memuat komentar.");
-      res.json(results);
-    });
+  db.query("SELECT name, comment FROM rsvp", (err, results) => {
+    if (err) return res.status(500).send("Gagal memuat komentar.");
+    res.json(results);
   });
-  
+});
 
-app.listen(3000, () => console.log("Server berjalan di port 3000"));
+app.listen(4009, () => console.log("Server berjalan di port 3000"));
