@@ -15,7 +15,7 @@ const db = mysql.createConnection({
   host: 'localhost',
   user: 'evansalfahmi',
   password: 'evansalfahmi',
-  database: 'laravel',
+  database: 'wedding_rsvp',
 });
 
 db.connect(err => {
