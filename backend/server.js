@@ -1,72 +1,71 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const mysql = require('mysql');
-const { GoogleSpreadsheet } = require('google-spreadsheet');
+const express = require("express");
+const bodyParser = require("body-parser");
+const mysql = require("mysql2");
+const { google } = require("googleapis");
 
 const app = express();
-const PORT = 3000;
-
-// Middleware
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// MySQL Connection
+// Konfigurasi MySQL
 const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'evansalfahmi',
-  password: 'evansalfahmi',
-  database: 'wedding_rsvp',
+  host: "localhost",
+  user: "evansalfahmi",
+  password: "evansalfahmi",
+  database: "wedding_rsvp",
 });
 
-db.connect(err => {
-  if (err) {
-    console.error('MySQL connection error:', err);
-    return;
-  }
-  console.log('Connected to MySQL');
+db.connect((err) => {
+  if (err) throw err;
+  console.log("MySQL connected...");
 });
 
-// Google Spreadsheet Setup
-const doc = new GoogleSpreadsheet('SPREADSHEET_ID'); // Ganti dengan ID spreadsheet Anda
-const credentials = require('./credentials.json'); // File JSON kredensial Google API
+// Konfigurasi Google Sheets
+const sheets = google.sheets({ version: "v4" });
+const auth = new google.auth.GoogleAuth({
+  keyFile: "credentials.json",
+  scopes: ["https://www.googleapis.com/auth/spreadsheets"],
+});
+const spreadsheetId = "1EcYIP2sRmKxXNDPXGUD4uXLk9Y3JfDPtPwGHQIZB4m8";
 
-async function accessSpreadsheet() {
-  await doc.useServiceAccountAuth(credentials);
-  await doc.loadInfo(); // Load spreadsheet info
-}
-
-accessSpreadsheet().catch(console.error);
-
-// Handle RSVP Submission
-app.post('/submit-rsvp', async (req, res) => {
+// API untuk menerima data RSVP
+app.post("/rsvp", async (req, res) => {
   const { name, phone, attendance, comment } = req.body;
 
-  // Save to MySQL
-  const query = 'INSERT INTO rsvp (name, phone, attendance, comment) VALUES (?, ?, ?, ?)';
-  db.query(query, [name, phone, attendance, comment], err => {
-    if (err) {
-      console.error('MySQL insert error:', err);
-      res.status(500).send('Error saving to database');
-      return;
-    }
-    console.log('Saved to MySQL');
-  });
-
-  // Save to Google Spreadsheet
-  try {
-    const sheet = doc.sheetsByIndex[0]; // Gunakan sheet pertama
-    await sheet.addRow({ Name: name, Phone: phone, Attendance: attendance, Comment: comment });
-    console.log('Saved to Google Spreadsheet');
-  } catch (error) {
-    console.error('Spreadsheet save error:', error);
-    res.status(500).send('Error saving to spreadsheet');
-    return;
+  if (!name || !phone || !attendance) {
+    return res.status(400).send("Semua field wajib diisi.");
   }
 
-  res.status(200).send('RSVP submitted successfully');
+  // Simpan ke MySQL
+  const sql = "INSERT INTO rsvp (name, phone, attendance, comment) VALUES (?, ?, ?, ?)";
+  db.query(sql, [name, phone, attendance, comment], (err) => {
+    if (err) return res.status(500).send("Gagal menyimpan ke database.");
+  });
+
+  // Simpan ke Google Sheets
+  try {
+    const authClient = await auth.getClient();
+    await sheets.spreadsheets.values.append({
+      auth: authClient,
+      spreadsheetId,
+      range: "RSVP!A1",
+      valueInputOption: "RAW",
+      requestBody: {
+        values: [[name, phone, attendance, comment]],
+      },
+    });
+  } catch (error) {
+    return res.status(500).send("Gagal menyimpan ke Google Sheets.");
+  }
+
+  res.status(200).send("RSVP berhasil disimpan.");
 });
 
-// Start Server
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+app.get("/comments", (req, res) => {
+    db.query("SELECT name, comment FROM rsvp", (err, results) => {
+      if (err) return res.status(500).send("Gagal memuat komentar.");
+      res.json(results);
+    });
+  });
+  
+
+app.listen(3000, () => console.log("Server berjalan di port 3000"));
