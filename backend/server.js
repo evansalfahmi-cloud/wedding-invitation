@@ -123,6 +123,12 @@ app.get("/comments", (req, res) => {
   });
 
   
+// Menjalankan server di port 4029
+app.listen(4029, () => {
+  console.log("Server berjalan di port 4029");
+});
+
+  
 /*
 // API untuk menampilkan data RSVP dari Google Sheets
 app.get("/google-rsvp", async (req, res) => {
@@ -162,7 +168,3 @@ app.get("/google-comments", async (req, res) => {
  */ 
   
 
-// Menjalankan server di port 4019
-app.listen(4019, () => {
-  console.log("Server berjalan di port 4019");
-});

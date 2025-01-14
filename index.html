@@ -324,7 +324,7 @@
   async function loadComments() {
     try {
       // Ambil data komentar dari API
-      const response = await fetch("http://localhost:4019/comments"); // URL sesuai dengan server Anda
+      const response = await fetch("http://192.168.253.128:4029/comments");; // URL sesuai dengan server Anda
       const comments = await response.json();
 
       // Temukan container untuk komentar
@@ -363,7 +363,7 @@
     const data = Object.fromEntries(formData);
 
     // Sending data to the server using fetch API
-    fetch('http://192.168.253.128:4019/rsvp', {
+    fetch('http://192.168.253.128:4029/rsvp', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
